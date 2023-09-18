@@ -1,0 +1,42 @@
+{
+  "name": "@streamkits/nestjs_module_factorydrive",
+  "version": "0.0.1",
+  "description": "Factory drive module for NestJS framework",
+  "repository": "https://github.com/StreamKITS/nestjs_module_factorydrive.git",
+  "author": "Tacx <12997062+tacxticx88@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "postbuild": "cpr README.md dist/README.md && cpr LICENSE dist/LICENSE && cpr package.json dist/package.json"
+  },
+  "dependencies": {
+    "fs-extra": "^11.1.1",
+    "node-exceptions": "^4.0.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "@nestjs/common": "^9.3.10",
+    "@nestjs/core": "^9.3.10",
+    "@types/fs-extra": "^11.0.2",
+    "@types/node": "^18.0.0",
+    "cpr": "^3.0.1",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.2",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^4.4.0",
+    "rxjs": "^7.8.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^6.0.0 || ^7.0.0 || ^8.0.0",
+    "@nestjs/core": "^6.0.0 || ^7.0.0 || ^8.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
