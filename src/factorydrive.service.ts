@@ -7,6 +7,7 @@ export class FactorydriveService {
   private storageManager: StorageManager
 
   public constructor(@Inject(FACTORYDRIVE_MODULE_OPTIONS_TOKEN) protected options: StorageManagerConfig) {
+    console.log('FactorydriveService.constructor', options)
     this.storageManager = new StorageManager(options)
   }
 
