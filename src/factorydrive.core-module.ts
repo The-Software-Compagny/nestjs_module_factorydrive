@@ -12,7 +12,7 @@ export class FactorydriveCoreModule {
   public static forRoot(options: FactorydriveModuleOptions): DynamicModule {
     const storageModuleOptions: Provider = {
       provide: FACTORYDRIVE_MODULE_OPTIONS_TOKEN,
-      useValue: options,
+      useValue: options.config,
     }
     return {
       module: FactorydriveCoreModule,
