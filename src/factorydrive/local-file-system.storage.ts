@@ -1,7 +1,7 @@
 import * as fse from 'fs-extra'
 import { promises as fs } from 'fs'
 import { dirname, join, relative, resolve, sep } from 'path'
-import Storage from './abstract.storage'
+import AbstractStorage from './abstract.storage'
 import { isReadableStream, pipeline } from './utils'
 import { FileNotFoundException, PermissionMissingException, UnknownException } from '../exceptions'
 import { ContentResponse, DeleteResponse, ExistsResponse, FileListResponse, Response, StatResponse } from './types'
@@ -21,7 +21,7 @@ function handleError(err: Error & { code: string; path?: string }, location: str
 }
 
 // noinspection JSUnusedGlobalSymbols
-export class LocalFileSystemStorage extends Storage {
+export class LocalFileSystemStorage extends AbstractStorage {
   private readonly $root: string
 
   public constructor(config: LocalFileSystemStorageConfig) {
@@ -110,8 +110,10 @@ export class LocalFileSystemStorage extends Storage {
     }
   }
 
-  public getStream(location: string): NodeJS.ReadableStream {
-    return fse.createReadStream(this._fullPath(location))
+  public getStream(location: string): Promise<NodeJS.ReadableStream> {
+    return new Promise((resolve) => {
+      resolve(fse.createReadStream(this._fullPath(location)))
+    })
   }
 
   public async move(src: string, dest: string): Promise<Response> {

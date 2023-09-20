@@ -1,10 +1,11 @@
 import { DynamicModule, Module } from '@nestjs/common'
-import { FactorydriveModuleAsyncOptions, FactorydriveModuleOptions } from './factorydrive.interfaces'
+import { FactorydriveModuleAsyncOptions } from './factorydrive.interfaces'
 import { FactorydriveCoreModule } from './factorydrive.core-module'
+import { StorageManagerConfig } from './factorydrive'
 
 @Module({})
 export class FactorydriveModule {
-  public static forRoot(options: FactorydriveModuleOptions): DynamicModule {
+  public static forRoot(options: StorageManagerConfig): DynamicModule {
     return {
       module: FactorydriveModule,
       imports: [FactorydriveCoreModule.forRoot(options)],

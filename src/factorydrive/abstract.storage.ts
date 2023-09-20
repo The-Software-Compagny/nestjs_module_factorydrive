@@ -50,7 +50,7 @@ export default abstract class AbstractStorage {
     throw new MethodNotSupportedException('getStat', this.constructor.name)
   }
 
-  public getStream(_location: string): NodeJS.ReadableStream {
+  public getStream(_location: string): Promise<NodeJS.ReadableStream> {
     throw new MethodNotSupportedException('getStream', this.constructor.name)
   }
 

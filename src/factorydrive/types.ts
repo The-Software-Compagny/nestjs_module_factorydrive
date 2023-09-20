@@ -34,7 +34,7 @@ export interface ContentResponse<ContentType> extends Response {
 }
 
 export interface SignedUrlOptions {
-  expiry?: number
+  expiresIn?: number
 }
 
 export interface SignedUrlResponse extends Response {
