@@ -6,6 +6,26 @@
   "author": "Tacx <12997062+tacxticx88@users.noreply.github.com>",
   "license": "MIT",
   "main": "dist/index.js",
+  "keywords": [
+    "factory",
+    "node",
+    "nodejs",
+    "disk",
+    "driver",
+    "local",
+    "drive",
+    "abstract",
+    "abstraction",
+    "nestjs",
+    "storage",
+    "filesystem",
+    "file",
+    "aws",
+    "promise",
+    "async",
+    "spaces",
+    "factorydrive"
+  ],
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc",
@@ -34,8 +54,8 @@
     "typescript": "^5.0.2"
   },
   "peerDependencies": {
-    "@nestjs/common": "^6.0.0 || ^7.0.0 || ^8.0.0",
-    "@nestjs/core": "^6.0.0 || ^7.0.0 || ^8.0.0"
+    "@nestjs/common": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0",
+    "@nestjs/core": "^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0"
   },
   "publishConfig": {
     "access": "public"
