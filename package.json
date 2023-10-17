@@ -40,7 +40,7 @@
     "@nestjs/common": "^9.3.10",
     "@nestjs/core": "^9.3.10",
     "@types/fs-extra": "^11.0.2",
-    "@types/node": "^18.0.0",
+    "@types/node": "^20.8.6",
     "cpr": "^3.0.1",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
