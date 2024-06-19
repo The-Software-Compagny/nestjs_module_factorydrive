@@ -100,7 +100,7 @@ export class FileStorageService {
   }
 
   public async moveFile(path: string, target: string): Promise<void> {
-    await this.factorydrive.getDisk('s3').delete(path, target)
+    await this.factorydrive.getDisk('s3').move(path, target)
   }
 
   public async copyFile(path: string, target: string): Promise<void> {
