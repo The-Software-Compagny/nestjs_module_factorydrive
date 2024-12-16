@@ -2,22 +2,31 @@ import { LocalFileSystemStorage } from './local-file-system.storage'
 import AbstractStorage from './abstract.storage'
 import { DriverNotSupportedException, InvalidConfigException } from '../exceptions'
 import { StorageManagerConfig, StorageManagerDiskConfig, StorageManagerSingleDiskConfig } from './types'
+import { Logger } from '@nestjs/common'
 
 interface StorageConstructor<T extends AbstractStorage = AbstractStorage> {
-  new (...args: any[]): T
+  // eslint-disable-next-line prettier/prettier, @typescript-eslint/no-explicit-any
+  new(...args: any[]): T
 }
 
-// noinspection JSUnusedGlobalSymbols
 export default class StorageManager {
+  private readonly logger = new Logger(StorageManager.name)
+
   private readonly defaultDisk: string | undefined
   private readonly disksConfig: StorageManagerDiskConfig
+
   private _disks: Map<string, AbstractStorage> = new Map()
   private _drivers: Map<string, StorageConstructor> = new Map()
 
   public constructor(config: StorageManagerConfig) {
     this.defaultDisk = config.default
     this.disksConfig = config.disks || {}
-    this.registerDriver('local', LocalFileSystemStorage)
+
+    if (config.registerLocalDriver !== false) {
+      this.registerDriver('local', LocalFileSystemStorage)
+    }
+
+    this.logger.log('StorageManager initialized 🟢')
   }
 
   public getDisks(): Map<string, AbstractStorage> {
@@ -26,6 +35,18 @@ export default class StorageManager {
 
   public getDrivers(): Map<string, StorageConstructor> {
     return this._drivers
+  }
+
+  public async initDisks(): Promise<void> {
+    for (const diskName of Object.keys(this.disksConfig)) {
+      const disk = this.disk(diskName)
+      this.logger.debug(`Initializing disk <${diskName}> 📀`)
+
+      if (typeof disk.onStorageInit === 'function') {
+        await this.disk(diskName).onStorageInit()
+      }
+    }
+    this.logger.log('All disks initialized 🟢')
   }
 
   public disk<T extends AbstractStorage = AbstractStorage>(name?: string): T {
@@ -50,12 +71,14 @@ export default class StorageManager {
     }
 
     const Driver = this._drivers.get(diskConfig.driver)
+
     if (!Driver) {
       throw DriverNotSupportedException.driver(diskConfig.driver)
     }
 
     const disk = new Driver(diskConfig.config)
     this._disks.set(name, disk)
+
     return disk as T
   }
 
@@ -68,5 +91,6 @@ export default class StorageManager {
 
   public registerDriver<T extends AbstractStorage>(name: string, driver: StorageConstructor<T>): void {
     this._drivers.set(name, driver)
+    this.logger.debug(`Registered <${name}> driver 🚗`)
   }
 }

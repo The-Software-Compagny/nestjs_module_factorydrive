@@ -1,6 +1,7 @@
 import { promisify } from 'util'
 import { pipeline as nodePipeline } from 'stream'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isReadableStream(stream: any): stream is NodeJS.ReadableStream {
   return (
     stream !== null &&

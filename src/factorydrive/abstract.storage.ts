@@ -2,18 +2,20 @@
 // noinspection JSUnusedGlobalSymbols
 
 import { MethodNotSupportedException } from '../exceptions'
-import {
-  ContentResponse,
-  DeleteResponse,
-  ExistsResponse,
-  FileListResponse,
-  Response,
-  SignedUrlOptions,
-  SignedUrlResponse,
-  StatResponse,
-} from './types'
+import { ContentResponse, DeleteResponse, ExistsResponse, FileListResponse, Response, SignedUrlOptions, SignedUrlResponse, StatResponse } from './types'
 
 export default abstract class AbstractStorage {
+  public constructor() {
+    if (this.constructor === AbstractStorage) {
+      throw new TypeError('Abstract class "AbstractStorage" cannot be instantiated directly.')
+    }
+  }
+
+  public onStorageInit(): void | Promise<void> {
+    console.log('onStorageInita')
+    return Promise.resolve()
+  }
+
   public append(_location: string, _content: Buffer | string): Promise<Response> {
     throw new MethodNotSupportedException('append', this.constructor.name)
   }

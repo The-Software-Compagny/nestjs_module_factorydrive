@@ -19,6 +19,7 @@ export interface StorageManagerDiskConfig {
 export interface StorageManagerConfig {
   default?: string
   disks?: StorageManagerDiskConfig
+  registerLocalDriver?: boolean
 }
 
 export interface Response {

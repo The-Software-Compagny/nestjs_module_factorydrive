@@ -6,8 +6,10 @@ export interface FactorydriveModuleOptionsFactory {
 }
 
 export interface FactorydriveModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   inject?: any[]
   useClass?: Type<FactorydriveModuleOptionsFactory>
   useExisting?: Type<FactorydriveModuleOptionsFactory>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useFactory?: (...args: any[]) => Promise<StorageManagerConfig> | StorageManagerConfig
 }

@@ -7,7 +7,7 @@ import { StorageManagerConfig } from './factorydrive'
 @Global()
 @Module({})
 export class FactorydriveCoreModule {
-  public constructor() {}
+  public constructor() { }
 
   public static forRoot(options: StorageManagerConfig): DynamicModule {
     const storageModuleOptions: Provider = {

@@ -20,7 +20,6 @@ function handleError(err: Error & { code: string; path?: string }, location: str
   }
 }
 
-// noinspection JSUnusedGlobalSymbols
 export class LocalFileSystemStorage extends AbstractStorage {
   private readonly $root: string
 
